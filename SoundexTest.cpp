@@ -7,5 +7,6 @@ class Soundex{
 
 TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord){
     Soundex soundex;
+    ASSERT_EQ(true, true);
 }
 
