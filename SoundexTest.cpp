@@ -3,7 +3,7 @@
 class Soundex{
 public:
     std::string encode(const std::string& word)const{
-        return word;
+        return word + "000";
     }
 };
 
@@ -13,10 +13,18 @@ using namespace testing;
 
 
 TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord){
-    Soundex soundex;
+    Soundex sut;
 
-    auto encoded = soundex.encode("A");
+    auto encoded = sut.encode("A");
 
-    ASSERT_THAT(encoded, Eq("A"));
+    ASSERT_THAT(encoded, Eq("A000"));
+}
+
+TEST(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
+    Soundex sut;
+
+    auto encoded = sut.encode("I");
+
+    ASSERT_THAT(encoded, Eq("I000"));
 }
 
