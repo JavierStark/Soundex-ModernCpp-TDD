@@ -18,8 +18,9 @@ enable_testing()
 add_executable(ModernCppTDD main.cpp
         SoundexTest.cpp)
 
-target_link_libraries(ModernCppTDD GTest::gtest_main)
+target_link_libraries(ModernCppTDD GTest::gtest_main GTest::gmock_main)
 
 include(GoogleTest)
 gtest_discover_tests(ModernCppTDD)
+
 

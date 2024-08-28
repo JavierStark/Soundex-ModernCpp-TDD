@@ -1,12 +1,22 @@
-class Soundex{
+#include <iostream>
 
+class Soundex{
+public:
+    std::string encode(const std::string& word)const{
+        return word;
+    }
 };
 
 
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+using namespace testing;
+
 
 TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord){
     Soundex soundex;
-    ASSERT_EQ(true, true);
+
+    auto encoded = soundex.encode("A");
+
+    ASSERT_THAT(encoded, Eq("A"));
 }
 
