@@ -21,3 +21,7 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
     ASSERT_THAT(encoded, Eq("I000"));
 }
 
+TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropiateDigits){
+    ASSERT_THAT(sut.encode("Ab"), Eq("A100"));
+}
+
