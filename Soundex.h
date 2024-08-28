@@ -10,12 +10,15 @@
 class Soundex{
 public:
     std::string encode(const std::string& word)const{
-        auto encoded = word.substr(0,1);
+        return zeroPad(head(word) + encodedDigits(word));
+    }
 
-        if(word.length() > 1)
-            encoded += "1";
+    std::string head(const std::string& word) const {
+        return word.substr(0, 1);
+    }
 
-        return zeroPad(encoded);
+    std::string encodedDigits(const std::string& word) const{
+        return word.length() > 1 ? "1" : "";
     }
 
 private:
