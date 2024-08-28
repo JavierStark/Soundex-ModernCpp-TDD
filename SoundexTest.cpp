@@ -16,18 +16,19 @@ private:
 #include <gmock/gmock.h>
 using namespace testing;
 
-
-TEST(SoundexEncoding, RetainSoleLetterOfOneLetterWord){
+class SoundexEncoding:public testing::Test{
+public:
     Soundex sut;
+};
 
+
+TEST_F(SoundexEncoding, RetainSoleLetterOfOneLetterWord){
     auto encoded = sut.encode("A");
 
     ASSERT_THAT(encoded, Eq("A000"));
 }
 
-TEST(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
-    Soundex sut;
-
+TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
     auto encoded = sut.encode("I");
 
     ASSERT_THAT(encoded, Eq("I000"));
