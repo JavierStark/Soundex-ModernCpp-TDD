@@ -25,3 +25,7 @@ TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropiateDigits){
     EXPECT_THAT(sut.encode("Ax"), Eq("A200"));
 }
 
+TEST_F(SoundexEncoding, IgnoresNonAlphabetics){
+    ASSERT_THAT(sut.encode("A#"), Eq("A000"));
+}
+
