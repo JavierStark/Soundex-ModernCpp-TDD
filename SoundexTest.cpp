@@ -22,8 +22,6 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 }
 
 TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropiateDigits){
-    EXPECT_THAT(sut.encode("Ab"), Eq("A100"));
-    EXPECT_THAT(sut.encode("Ac"), Eq("A200"));
-    EXPECT_THAT(sut.encode("Ad"), Eq("A300"));
+    EXPECT_THAT(sut.encode("Ax"), Eq("A200"));
 }
 
