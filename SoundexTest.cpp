@@ -36,3 +36,7 @@ TEST_F(SoundexEncoding, ReplacesMultipleConsonantsWithDigits){
 TEST_F(SoundexEncoding, LimitsLengthToFourCharacters){
     ASSERT_THAT(sut.encode("Dcbld").length(), Eq(4u));
 }
+
+TEST_F(SoundexEncoding, IgnoreVowelLikeLetters){
+    ASSERT_THAT(sut.encode("Baeiouhycdl"), Eq("B234"));
+}
