@@ -51,3 +51,11 @@ TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
 TEST_F(SoundexEncoding, UppercasesFirstLetter){
     ASSERT_THAT(sut.encode("abcd"), StartsWith("A"));
 }
+
+TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants){
+    ASSERT_THAT(sut.encode("BCDL"), Eq(sut.encode("Bcdl")));
+}
+
+TEST_F(SoundexEncoding, CombinesDuplicateCodoesWhen2ndLetterDuplicates1st){
+    ASSERT_THAT(sut.encode("Bbcd"), Eq("B230"));
+}
