@@ -12,7 +12,7 @@ class Soundex{
 public:
     std::string encode(const std::string& word)const{
 
-        return zeroPad(upperFront(head(word)) + encodedDigits(tail(word)));
+        return zeroPad(upperFront(head(word)) + tail(encodedDigits(word)));
     }
 
     std::string encodedDigit(char letter) const {
@@ -58,7 +58,9 @@ private:
     std::string encodedDigits(const std::string& word) const{
         std::string encoding;
 
-        for(auto c : word) {
+        encoding += encodedDigit(word.front());
+
+        for(auto c : tail(word)) {
             if(isComplete(encoding)) break;
 
             auto digit = encodedDigit(c);
@@ -70,7 +72,7 @@ private:
         return encoding;
     }
 
-    static bool isComplete(const std::string &encoding) { return encoding.length() == MaxCodeLength - 1; }
+    static bool isComplete(const std::string &encoding) { return encoding.length() == MaxCodeLength; }
 
     std::string zeroPad(const std::string& word) const{
         auto zerosNeeded = MaxCodeLength - word.length();
