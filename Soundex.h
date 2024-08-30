@@ -17,21 +17,28 @@ public:
 private:
 
     static const size_t MaxCodeLength {4};
-    std::string head(const std::string& word) const {
+    static std::string head(const std::string& word) {
         return word.substr(0, 1);
     }
 
-    std::string tail(const std::string& word) const {
+    static std::string tail(const std::string& word) {
         return word.substr(1);
     }
 
     std::string encodedDigits(const std::string& word) const{
-        std::string encoded;
-        for(auto c : word)
-            encoded += encodedDigit(c);
+        std::string encoding;
 
-        return encoded;
+        for(auto c : word) {
+            if(isComplete(encoding)) break;
+
+            encoding += encodedDigit(c);
+        }
+
+        return encoding;
     }
+
+    static bool isComplete(const std::string &encoding) { return encoding.length() == MaxCodeLength - 1; }
+
     std::string encodedDigit(char letter) const{
         const std::unordered_map<char, std::string> encodings{
                 {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"},

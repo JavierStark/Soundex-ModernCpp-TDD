@@ -32,3 +32,7 @@ TEST_F(SoundexEncoding, IgnoresNonAlphabetics){
 TEST_F(SoundexEncoding, ReplacesMultipleConsonantsWithDigits){
     ASSERT_THAT(sut.encode("Acdl"), Eq("A234"));
 }
+
+TEST_F(SoundexEncoding, LimitsLengthToFourCharacters){
+    ASSERT_THAT(sut.encode("Dcbld").length(), Eq(4u));
+}
