@@ -11,18 +11,24 @@
 class Soundex{
 public:
     std::string encode(const std::string& word)const{
-        return zeroPad(head(word) + encodedDigits(word));
+        return zeroPad(head(word) + encodedDigits(tail(word)));
     }
 
 private:
-    static const size_t MaxCodeLength {4};
 
+    static const size_t MaxCodeLength {4};
     std::string head(const std::string& word) const {
         return word.substr(0, 1);
     }
 
+    std::string tail(const std::string& word) const {
+        return word.substr(1);
+    }
+
     std::string encodedDigits(const std::string& word) const{
-        return word.length() > 1 ? encodedDigit(word[1]) : "";
+        if(word.empty()) return "";
+
+        return encodedDigit(word.front());
     }
     std::string encodedDigit(char letter) const{
         const std::unordered_map<char, std::string> encodings{
