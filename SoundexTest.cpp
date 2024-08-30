@@ -59,3 +59,7 @@ TEST_F(SoundexEncoding, IgnoresCaseWhenEncodingConsonants){
 TEST_F(SoundexEncoding, CombinesDuplicateCodoesWhen2ndLetterDuplicates1st){
     ASSERT_THAT(sut.encode("Bbcd"), Eq("B230"));
 }
+
+TEST_F(SoundexEncoding, DoesNotCombineDuplicateEncodingsSeparateByVowels){
+    ASSERT_THAT(sut.encode("Jbob"), Eq("J110"));
+}

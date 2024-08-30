@@ -69,17 +69,22 @@ private:
     }
 
     void encodeTail(std::string &encoding, const std::string &word) const {
-        for(auto c : tail(word)) {
-            if(isComplete(encoding)) break;
-            encodeLetter(encoding, c);
+        for(auto i = 1u; i < word.length(); i++) {
+            if(!isComplete(encoding))
+                encodeLetter(encoding, word[i], word[i-1]);
         }
     }
 
-    void encodeLetter(std::string &encoding, char letter) const {
+    void encodeLetter(std::string &encoding, char letter, char prev) const {
         auto digit = encodedDigit(letter);
 
-        if(digit != NotADigit && digit != lastDigit(encoding))
-            encoding += encodedDigit(letter);
+        if(digit != NotADigit &&
+        (digit != lastDigit(encoding) || isVowel(prev)))
+            encoding += digit;
+    }
+
+    bool isVowel(char letter) const{
+        return std::string("aeiouhy").find(lower(letter)) != std::string::npos;
     }
 
     static bool isComplete(const std::string &encoding) { return encoding.length() == MaxCodeLength; }
