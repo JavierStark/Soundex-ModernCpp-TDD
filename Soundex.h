@@ -71,12 +71,15 @@ private:
     void encodeTail(std::string &encoding, const std::string &word) const {
         for(auto c : tail(word)) {
             if(isComplete(encoding)) break;
-
-            auto digit = encodedDigit(c);
-
-            if(digit != NotADigit && digit != lastDigit(encoding))
-                encoding += encodedDigit(c);
+            encodeLetter(encoding, c);
         }
+    }
+
+    void encodeLetter(std::string &encoding, char letter) const {
+        auto digit = encodedDigit(letter);
+
+        if(digit != NotADigit && digit != lastDigit(encoding))
+            encoding += encodedDigit(letter);
     }
 
     static bool isComplete(const std::string &encoding) { return encoding.length() == MaxCodeLength; }
