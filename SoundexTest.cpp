@@ -47,3 +47,7 @@ TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
     ASSERT_THAT(sut.encodedDigit('d'), Eq(sut.encodedDigit('t')));
     ASSERT_THAT(sut.encode("Abfcgdt"), Eq("A123"));
 }
+
+TEST_F(SoundexEncoding, UppercasesFirstLetter){
+    ASSERT_THAT(sut.encode("abcd"), StartsWith("A"));
+}
