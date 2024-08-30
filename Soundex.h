@@ -15,7 +15,7 @@ public:
         return zeroPad(upperFront(head(word)) + encodedDigits(tail(word)));
     }
 
-    std::string encodedDigit(char letter) const{
+    std::string encodedDigit(char letter) {
         const std::unordered_map<char, std::string> encodings{
                 {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"},
                 {'c', "2"}, {'g', "2"}, {'j', "2"}, {'k', "2"}, {'q', "2"},
@@ -27,11 +27,12 @@ public:
         };
         auto it = encodings.find(letter);
 
-        return it == encodings.end() ? "" : it->second;
+        return it == encodings.end() ? NotADigit : it->second;
     }
 
 private:
     static const size_t MaxCodeLength {4};
+    const std::string NotADigit{"*"};
 
     static std::string head(const std::string& word) {
         return word.substr(0, 1);
@@ -42,7 +43,7 @@ private:
     }
 
     static std::string lastDigit(std::string encoding) {
-        if(encoding.empty()) return "";
+        if(encoding.empty()) return NotADigit;
         return std::string(1, encoding.back());
     }
 
@@ -55,7 +56,10 @@ private:
 
         for(auto c : word) {
             if(isComplete(encoding)) break;
-            if(encodedDigit(c) != lastDigit(encoding))
+
+            auto digit = encodedDigit(c);
+
+            if(digit != NotADigit && digit != lastDigit(encoding))
                 encoding += encodedDigit(c);
         }
 
