@@ -22,7 +22,7 @@ TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits){
 }
 
 TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropiateDigits){
-    EXPECT_THAT(sut.encode("Ax"), Eq("A200"));
+    ASSERT_THAT(sut.encode("Ax"), Eq("A200"));
 }
 
 TEST_F(SoundexEncoding, IgnoresNonAlphabetics){
@@ -39,4 +39,11 @@ TEST_F(SoundexEncoding, LimitsLengthToFourCharacters){
 
 TEST_F(SoundexEncoding, IgnoreVowelLikeLetters){
     ASSERT_THAT(sut.encode("Baeiouhycdl"), Eq("B234"));
+}
+
+TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
+    ASSERT_THAT(sut.encodedDigit('b'), Eq(sut.encodedDigit('f')));
+    ASSERT_THAT(sut.encodedDigit('c'), Eq(sut.encodedDigit('g')));
+    ASSERT_THAT(sut.encodedDigit('d'), Eq(sut.encodedDigit('t')));
+    ASSERT_THAT(sut.encode("Abfcgdt"), Eq("A123"));
 }
