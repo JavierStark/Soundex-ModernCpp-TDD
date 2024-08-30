@@ -29,6 +29,6 @@ TEST_F(SoundexEncoding, IgnoresNonAlphabetics){
     ASSERT_THAT(sut.encode("A#"), Eq("A000"));
 }
 
-TEST_F(SoundexEncoding, DISABLED_ReplacesMultipleConsonantsWithDigits){
+TEST_F(SoundexEncoding, ReplacesMultipleConsonantsWithDigits){
     ASSERT_THAT(sut.encode("Acdl"), Eq("A234"));
 }

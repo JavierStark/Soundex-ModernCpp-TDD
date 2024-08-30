@@ -26,9 +26,11 @@ private:
     }
 
     std::string encodedDigits(const std::string& word) const{
-        if(word.empty()) return "";
+        std::string encoded;
+        for(auto c : word)
+            encoded += encodedDigit(c);
 
-        return encodedDigit(word.front());
+        return encoded;
     }
     std::string encodedDigit(char letter) const{
         const std::unordered_map<char, std::string> encodings{
