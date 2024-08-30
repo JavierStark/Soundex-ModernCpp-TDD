@@ -38,7 +38,7 @@ TEST_F(SoundexEncoding, LimitsLengthToFourCharacters){
 }
 
 TEST_F(SoundexEncoding, IgnoreVowelLikeLetters){
-    ASSERT_THAT(sut.encode("Baeiouhycdl"), Eq("B234"));
+    ASSERT_THAT(sut.encode("BaAeEiIoOuUhHyYcdl"), Eq("B234"));
 }
 
 TEST_F(SoundexEncoding, CombinesDuplicateEncodings){
